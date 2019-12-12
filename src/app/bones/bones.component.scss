@@ -1,0 +1,29 @@
+.container {
+  width: 700px;
+  height: 150px;
+  margin: 0 auto;
+}
+.bones {
+  margin-left: 6px;
+  margin-top: 6px;
+  width: 60px;
+  height: 80px;
+  border: 2px solid black;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+.text {
+  text-align: center;
+  font-family: Algerian;
+  font-size: 50px;
+  margin: 0 auto;
+}
+
+.textOpen {
+  display: table;
+}
+
+a {
+  cursor: pointer;
+}
