@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {BonesModule} from './bones.module';
 import {BonesNumModule} from './bonesNum.module';
 import {BonesTwoModule} from './bonesTwo.module';
+import {BonesNumComponent} from './bonesNum.component';
+import {getStylesConfig} from '@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs';
+import {style} from '@angular/animations';
 
 @Component({
   selector: 'app-bones',
@@ -13,6 +16,7 @@ export class BonesComponent implements OnInit {
   bones: BonesModule[];
   bonesTwo: BonesTwoModule[];
   bonesNum: BonesNumModule[];
+  bonesNumber: BonesNumComponent
 
 
 
@@ -22,6 +26,18 @@ export class BonesComponent implements OnInit {
 
 
   ngOnInit() {
+
+
+
+    function shuffleArray(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      return array;
+    }
 
     this.bonesNum = [];
     this.bones = [];
@@ -34,20 +50,9 @@ export class BonesComponent implements OnInit {
           }
         }
 
-
-        function shuffleArray(array) {
-          for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-          }
-          return array;
-        }
-
         this.bones.push(bonesOne);
         shuffleArray(this.bonesNum)
-        this.bonesNum.push(shuffleArray({number: i}))
+        this.bonesNum.push({number: i})
 
         }
 
@@ -60,22 +65,19 @@ export class BonesComponent implements OnInit {
             continue nextPrime;
           }
         }
+
         this.bonesTwo.push(bonesTwo)
+        shuffleArray(this.bonesNum)
         this.bonesNum.push({numberTwo: i});
       }
   }
 
 
   openBones(num, ev) {
-// num.show = !num.show
-console.log(ev.text)
-    console.log(ev)
-    if (ev.text != ev.text){
-      num.show = false
-    }else{
-      num.show = true
-    }
-
+    num.show = !num.show
+  //   let a = ev.text;
+  //   console.log(a);
+    addEventListener("click",function(){
+      document.a.style.border = "2px solid rebeccapurple";});
   }
-
 }

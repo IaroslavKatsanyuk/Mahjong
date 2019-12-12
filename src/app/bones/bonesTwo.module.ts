@@ -1,3 +1,3 @@
 export class BonesTwoModule {
-  number: number;
+  numberTwo: number;
 }
