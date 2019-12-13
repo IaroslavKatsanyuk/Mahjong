@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BonesModule} from './bones.module';
 import {BonesNumModule} from './bonesNum.module';
 import {BonesTwoModule} from './bonesTwo.module';
-import {BonesNumComponent} from './bonesNum.component';
-import {getStylesConfig} from '@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs';
-import {style} from '@angular/animations';
+import {BonesModel} from './bones.model';
 
 @Component({
   selector: 'app-bones',
@@ -13,20 +11,19 @@ import {style} from '@angular/animations';
 })
 export class BonesComponent implements OnInit {
 
+  public bonesArray: BonesModel[] = [];
+  public firstSelected: BonesModel;
+  public secondSelected: BonesModel;
   bones: BonesModule[];
   bonesTwo: BonesTwoModule[];
   bonesNum: BonesNumModule[];
-  bonesNumber: BonesNumComponent
-
 
 
   constructor() {
   }
 
 
-
   ngOnInit() {
-
 
 
     function shuffleArray(array) {
@@ -50,11 +47,11 @@ export class BonesComponent implements OnInit {
           }
         }
 
-        this.bones.push(bonesOne);
+        this.bones.push({number: bonesOne});
         shuffleArray(this.bonesNum)
         this.bonesNum.push({number: i})
 
-        }
+      }
 
     this.bonesTwo = [];
     const bonesTwo = 50;
@@ -66,18 +63,39 @@ export class BonesComponent implements OnInit {
           }
         }
 
-        this.bonesTwo.push(bonesTwo)
+        this.bonesTwo.push({numberTwo: bonesTwo});
         shuffleArray(this.bonesNum)
         this.bonesNum.push({numberTwo: i});
       }
   }
 
-
-  openBones(num, ev) {
-    num.show = !num.show
-  //   let a = ev.text;
-  //   console.log(a);
-    addEventListener("click",function(){
-      document.a.style.border = "2px solid rebeccapurple";});
+  onClickHandler(bones: BonesModel) {
+    if (!this.firstSelected) {
+      bones.show = true;
+      this.firstSelected = bones;
+      console.log(this.firstSelected)
+      return;
+    }
+    if (!this.secondSelected) {
+      this.secondSelected = bones;
+      bones.show = true;
+      console.log(this.secondSelected)
+    }
+    if (this.firstSelected && this.secondSelected && this.firstSelected.number || this.firstSelected.numberTwo === this.secondSelected.number || this.secondSelected.numberTwo) {
+      console.log(this.firstSelected.number)
+      console.log(this.firstSelected.numberTwo)
+      console.log(this.secondSelected.number)
+      console.log(this.secondSelected.numberTwo)
+      this.firstSelected.isSelected = true;
+      this.secondSelected.isCompleted = true;
+      this.firstSelected = null;
+      this.secondSelected = null;
+    }else {
+      this.firstSelected = null;
+      this.secondSelected = null;
+      setTimeout(() => {
+        bones.show = false
+      }, 1500)
+    }
   }
 }

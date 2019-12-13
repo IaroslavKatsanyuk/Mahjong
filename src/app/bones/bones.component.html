@@ -1,5 +1,10 @@
+
+
+
+
+
 <div class="container">
-  <a class="bones" (click)="openBones(num, $event.target)" *ngFor="let num of bonesNum">
-    <p class="text" [hidden]="!num.show">{{num.number}}{{num.numberTwo}}</p>
+  <a class="bones" (click)="onClickHandler(num)" *ngFor="let num of bonesNum">
+      <p class="text" [hidden]="!num.show">{{num.number}}{{num.numberTwo}}</p>
   </a>
 </div>
